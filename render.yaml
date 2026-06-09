@@ -1,0 +1,36 @@
+# Configuración opcional para desplegar en Render con "Blueprint".
+# Si prefieres, puedes crear los servicios manualmente desde el dashboard.
+services:
+  - type: web
+    name: tienda-online-nestjs
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: tienda-online-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: tienda-online-db
+          property: port
+      - key: DB_USERNAME
+        fromDatabase:
+          name: tienda-online-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: tienda-online-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: tienda-online-db
+          property: database
+      - key: DB_SSL
+        value: "true"
+
+databases:
+  - name: tienda-online-db
+    plan: free
